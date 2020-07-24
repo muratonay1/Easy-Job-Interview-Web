@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
-import '../CSS/Login.css';
 import { Link } from 'react-router-dom';
 import posed from 'react-pose';
 
