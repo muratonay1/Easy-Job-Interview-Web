@@ -1,18 +1,15 @@
-import React, { Component } from 'react'
-import { Modal, Form, Button, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import Axios from 'axios';
-const image = require('../Images/job.png')
+import React, { Component } from 'react';
+import { Modal, Form, Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import {SoapService} from './Api.ts';
+const image = require('../Images/job.png');
+var url = "https://localhost:44339/WebService-EJI.asmx";
 export default class Adver extends Component {
-    async getDataFetch(){
-        const response =
-          await fetch("http://192.168.1.5:44339/WebService-EJI.asmx/HelloWorld",
-            { headers: {'Content-Type': 'application/json'}}
-          )
-        console.log(await response.json())
-    }
-    componentDidMount(){
-        this.getDataFetch()
+   
+    componentDidMount() {
+        
+        SoapService.withPostParameter(url,"Id")
+        //SoapService.withoutParameter(url,"Jobs")
     }
     renderItem = () => {
         return (
