@@ -8,8 +8,11 @@ export default class Adver extends Component {
    
     componentDidMount() {
         
-        SoapService.withPostParameter(url,"Id")
-        //SoapService.withoutParameter(url,"Jobs")
+        SoapService.withPostParameter(url,"Id",({
+            JobName:'deneme',
+            JobId:4,
+        }))
+        SoapService.withoutParameter(url,"Jobs")
     }
     renderItem = () => {
         return (
