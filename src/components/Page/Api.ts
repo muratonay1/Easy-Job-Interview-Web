@@ -27,6 +27,7 @@ function bodyParameterParser(params:JSON) {
     }
 }
 
+
 export class SoapService {
     /**
      * @param {string} Url "https://localhost:44339/WebService-EJI.asmx" 
@@ -36,18 +37,18 @@ export class SoapService {
      */
     static withPostParameter=(Url:String, WebMethod:String, Parameter:JSON)=>{
         var responseParser;
-        try {
-            Parameter == null ? console.log("Post Parameter Invalid"):responseParser=bodyParameterParser(Parameter)
-        } catch (error) {
-            console.log("POST PARAMETER EXCEPTION: ",error);
-        }
+        var promisVal;
+        Parameter === null ? console.log("Post Parameter Invalid"):responseParser=bodyParameterParser(Parameter)
+        
         return fetch(Url + '/' + WebMethod,{
             method:'POST',
             headers:{'Content-Type':'application/x-www-form-urlencoded'},
-            body:responseParser.toString()
+            body:responseParser
         })
         .then(response => response.json())
-        .then((data) => console.log("data:", data))
+        .then((data) => {
+           return data
+        })
         .catch(err=>{
             console.log(err)
         })
@@ -57,12 +58,12 @@ export class SoapService {
     * @param {string} WebMethod "GetCitys"
     */
     static withoutParameter=(Url:String, WebMethod:String)=>{
-        return fetch(Url + '/' + WebMethod, {
+        fetch(Url + '/' + WebMethod, {
             method: 'POST',
             headers: { 'Content-Type': 'text/html; charset=utf-8' },
         })
         .then(response => response.json())
-        .then((data) => console.log("data:", data))
+        .then((data) => {return data})
         .catch(error=>{
             console.log(error)
         })
